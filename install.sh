@@ -25,4 +25,9 @@ ln -s ${REPO}/etc/modprobe.d/scarlett.conf /etc/modprobe.d/
 echo putting config files at home directory
 ln -s ${REPO}/${HOME}/conf ${HOME}
 
+echo add tracking for changes on setup
+cat <<'EOF' >>${HOME}/.bashrc
+if test ! -z "$(git -C ${HOME}/setup status -s)"; then echo "You have changes on your setup repository."; fi
+EOF
+
 echo you should reboot for installation to finish
