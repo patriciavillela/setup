@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/bash -x
+
+GIT_SSH_COMMAND="ssh -oUserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 REPO=${HOME}/setup
 alias echo='{ set +x; } 2> /dev/null; builtin echo'
@@ -8,10 +10,10 @@ START_PACKAGES=(git tree make gcc libgtk-4-dev libasound2-dev)
 
 echo setting up environment
 sudo mkdir /src
-sudo chown -r ${USER}:${USER} /src
+sudo chown -R ${USER}:${USER} /src
 
 echo installing common software
-sudo apt install ${START_PACKAGES[@]}
+sudo apt install ${START_PACKAGES[@]} -y
 
 echo downloading and installing alsa-scarlett-gui
 pushd /src
